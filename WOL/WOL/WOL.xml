@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfMachine xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Machine>
+    <Name>Name1.local</Name>
+    <MAC>10:c3:7b:6c:cb:ec</MAC>
+    <IP />
+    <Broadcast>10.53.47.203</Broadcast>
+    <Netbios>idefix.sng.local</Netbios>
+    <Method>0</Method>
+    <Emergency>false</Emergency>
+    <ShutdownCommand />
+    <Group>A&amp;W</Group>
+    <UDPPort>9</UDPPort>
+    <TTL>128</TTL>
+    <RDPPort>3389</RDPPort>
+    <RDPFile />
+    <Note>werkstation 1</Note>
+    <UserID />
+    <Password></Password>
+    <Domain />
+    <ShutdownMethod>WMI</ShutdownMethod>
+    <KeepAlive>false</KeepAlive>
+    <RepeatCount>1</RepeatCount>
+  </Machine>
+  <Machine>
+    <Name>Name2.local</Name>
+    <MAC>10:c3:7b:6c:cb:ec</MAC>
+    <IP />
+    <Broadcast>10.53.47.203</Broadcast>
+    <Netbios>idefix.sng.local</Netbios>
+    <Method>0</Method>
+    <Emergency>false</Emergency>
+    <ShutdownCommand />
+    <Group>A&amp;W</Group>
+    <UDPPort>9</UDPPort>
+    <TTL>128</TTL>
+    <RDPPort>3389</RDPPort>
+    <RDPFile />
+    <Note>werkstation 2</Note>
+    <UserID />
+    <Password></Password>
+    <Domain />
+    <ShutdownMethod>WMI</ShutdownMethod>
+    <KeepAlive>false</KeepAlive>
+    <RepeatCount>1</RepeatCount>
+  </Machine>
+</ArrayOfMachine>
