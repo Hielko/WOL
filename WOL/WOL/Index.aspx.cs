@@ -10,11 +10,11 @@ namespace WOL
 {
     public partial class Index : System.Web.UI.Page
     {
-        private WolClients wolClients;
+        private WOLClients wolClients;
 
         protected void Page_Init(object sender, EventArgs e)
         {
-            wolClients = new WolClients(HttpContext.Current.Server.MapPath("~") + @"wol.xml");
+            wolClients = new WOLClients(HttpContext.Current.Server.MapPath("~") + @"wol.xml");
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -42,7 +42,7 @@ namespace WOL
                     TBLog.Text += $"Waking up {machine.Name}, MAC {machine.MAC} .... ";
                     try
                     {
-                        new WOLUtil().SendWOL(machine.MAC);
+                        WOLUtil.SendWOL(machine.MAC);
                     }
                     catch (Exception ex)
                     {

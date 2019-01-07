@@ -1,13 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Net;
-using System.Net.Sockets;
-using System.Text.RegularExpressions;
-using System.Web;
-using System.Xml.Linq;
 using System.Xml.Serialization;
 
 namespace WOL
@@ -26,13 +20,13 @@ namespace WOL
         public Machine[] Machines { get; set; }
     }
 
-    public class WolClients
+    public class WOLClients
     {
         private ArrayOfMachine machines = null;
 
         public Machine GetMachine(String name)
         {
-            return machines.Machines.ToList().Find(x => x.Name.Equals(name));
+            return GetMachines.Find(machine => machine.Name.Equals(name));
         }
 
         public List<Machine> GetMachines
@@ -40,7 +34,7 @@ namespace WOL
             get => machines.Machines.ToList();
         }
 
-        public WolClients(String filename)
+        public WOLClients(String filename)
         {
             XmlSerializer serializer = new XmlSerializer(typeof(ArrayOfMachine));
             StreamReader reader = new StreamReader(filename);
@@ -48,8 +42,5 @@ namespace WOL
             reader.Close();
         }
     }
-
-
-
 
 }
