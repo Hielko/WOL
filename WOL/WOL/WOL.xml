@@ -24,7 +24,7 @@
   </Machine>
   <Machine>
     <Name>Name2.local</Name>
-    <MAC>10:c3:7b:6c:cb:ec</MAC>
+    <MAC>10:c3:7b:6c:ce:ec</MAC>
     <IP />
     <Broadcast>10.53.47.203</Broadcast>
     <Netbios>idefix.sng.local</Netbios>
