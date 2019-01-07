@@ -34,9 +34,6 @@
                  <asp:Button ID="BtnWakeUp" runat="server" Text="Wakeup" OnClick="BtnWakeUp_Click" />
              </asp:Panel>
         </div>
-        <asp:Panel ID="Panel2" runat="server" Height="89px">
-            <asp:TextBox ID="TBLog" runat="server" Height="80px" ReadOnly="True" TextMode="MultiLine" Width="1114px"></asp:TextBox>
-        </asp:Panel>
     </form>
 </body>
 </html>

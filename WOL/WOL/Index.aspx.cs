@@ -10,18 +10,31 @@ namespace WOL
 {
     public partial class Index : System.Web.UI.Page
     {
-        private WolClients wolClients;
+        private WOLClients wolClients;
+        const string cookieName = "selectedMachine";
 
         protected void Page_Init(object sender, EventArgs e)
         {
-            wolClients = new WolClients(HttpContext.Current.Server.MapPath("~") + @"wol.xml");
+            wolClients = new WOLClients(HttpContext.Current.Server.MapPath("~") + @"wol.xml");
         }
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                wolClients.GetMachines.ForEach(machine => lbWolClients.Items.Add(machine.Name));
+                wolClients.GetMachines.ForEach(machine => lbWolClients.Items.Add(new ListItem(machine.Note, machine.Name)));
+
+                try
+                {
+                    if (int.TryParse(Request.Cookies[cookieName].Value, out int i))
+                    {
+                        lbWolClients.SelectedIndex = i;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Don't care
+                }
             }
         }
 
@@ -34,26 +47,16 @@ namespace WOL
         {
             if (lbWolClients.SelectedIndex >= 0)
             {
+                Response.Cookies[cookieName].Value = lbWolClients.SelectedIndex.ToString();
+
                 var Item = lbWolClients.Items[lbWolClients.SelectedIndex];
-                var machine = wolClients.GetMachine(Item.Text);
+                var machine = wolClients.GetMachine(Item.Value);
                 if (machine != null)
                 {
-                    TBLog.Text += $"Waking up {Item.Text}, MAC {machine.MAC} .... ";
-                    try
-                    {
-                        new WOLUtil().SendWOL(machine.MAC);
-                    } catch (Exception ex)
-                    {
-                        TBLog.Text += ex.ToString();
-                    }
+                    Response.Redirect($"runWOL.aspx?name={machine.Name}");
                 }
-                else
-                {
-                    TBLog.Text += $"Unknown machine {Item.Text}";
-                }
-
             }
-
         }
+
     }
 }

@@ -1,17 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text.RegularExpressions;
-using System.Web;
 
 namespace WOL
 {
     public class WOLUtil
     {
-        public void SendWOL(String macAddress)
+        public static void SendWOL(String macAddress)
         {
 
             //    var macAddress = "01-00-00-00-00-02";                      // Our device MAC address
@@ -47,7 +44,6 @@ namespace WOL
 
             sock.SendTo(payload, new IPEndPoint(IPAddress.Parse("255.255.255.255"), 0));  // Broadcast our packet
             sock.Close(10000);
-
         }
 
     }
