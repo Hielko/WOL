@@ -26,7 +26,7 @@ namespace WOL
 
         public Machine GetMachine(String name)
         {
-            return GetMachines.Find(machine => machine.Name.Equals(name));
+            return GetMachines.Find(machine => machine.Name.Equals(name, StringComparison.CurrentCultureIgnoreCase));
         }
 
         public List<Machine> GetMachines

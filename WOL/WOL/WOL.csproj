@@ -68,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Index.aspx" />
+    <Content Include="RunWOL.aspx" />
     <Content Include="Web.config" />
     <Content Include="wol.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -82,6 +83,13 @@
       <DependentUpon>Index.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RunWOL.aspx.cs">
+      <DependentUpon>RunWOL.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RunWOL.aspx.designer.cs">
+      <DependentUpon>RunWOL.aspx</DependentUpon>
+    </Compile>
     <Compile Include="WOLClients.cs" />
     <Compile Include="WOLUtil.cs" />
   </ItemGroup>

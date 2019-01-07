@@ -44,7 +44,6 @@ namespace WOL
 
             sock.SendTo(payload, new IPEndPoint(IPAddress.Parse("255.255.255.255"), 0));  // Broadcast our packet
             sock.Close(10000);
-
         }
 
     }

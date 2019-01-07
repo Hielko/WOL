@@ -11,6 +11,7 @@ namespace WOL
     public partial class Index : System.Web.UI.Page
     {
         private WOLClients wolClients;
+        const string cookieName = "selectedMachine";
 
         protected void Page_Init(object sender, EventArgs e)
         {
@@ -22,6 +23,18 @@ namespace WOL
             if (!IsPostBack)
             {
                 wolClients.GetMachines.ForEach(machine => lbWolClients.Items.Add(new ListItem(machine.Note, machine.Name)));
+
+                try
+                {
+                    if (int.TryParse(Request.Cookies[cookieName].Value, out int i))
+                    {
+                        lbWolClients.SelectedIndex = i;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Don't care
+                }
             }
         }
 
@@ -34,25 +47,13 @@ namespace WOL
         {
             if (lbWolClients.SelectedIndex >= 0)
             {
+                Response.Cookies[cookieName].Value = lbWolClients.SelectedIndex.ToString();
+
                 var Item = lbWolClients.Items[lbWolClients.SelectedIndex];
                 var machine = wolClients.GetMachine(Item.Value);
                 if (machine != null)
                 {
-                    BtnWakeUp.Enabled = false;
-                    TBLog.Text += $"Waking up {machine.Name}, MAC {machine.MAC} .... ";
-                    try
-                    {
-                        WOLUtil.SendWOL(machine.MAC);
-                    }
-                    catch (Exception ex)
-                    {
-                        TBLog.Text += ex.ToString();
-                    }
-                    BtnWakeUp.Enabled = true;
-                }
-                else
-                {
-                    TBLog.Text += $"Unknown machine {Item.Text}";
+                    Response.Redirect($"runWOL.aspx?name={machine.Name}");
                 }
             }
         }
