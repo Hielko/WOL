@@ -21,7 +21,7 @@ namespace WOL
         {
             if (!IsPostBack)
             {
-                wolClients.GetMachines.ForEach(machine => lbWolClients.Items.Add(machine.Name));
+                wolClients.GetMachines.ForEach(machine => lbWolClients.Items.Add(new ListItem(machine.Note, machine.Name)));
             }
         }
 
@@ -35,25 +35,27 @@ namespace WOL
             if (lbWolClients.SelectedIndex >= 0)
             {
                 var Item = lbWolClients.Items[lbWolClients.SelectedIndex];
-                var machine = wolClients.GetMachine(Item.Text);
+                var machine = wolClients.GetMachine(Item.Value);
                 if (machine != null)
                 {
-                    TBLog.Text += $"Waking up {Item.Text}, MAC {machine.MAC} .... ";
+                    BtnWakeUp.Enabled = false;
+                    TBLog.Text += $"Waking up {machine.Name}, MAC {machine.MAC} .... ";
                     try
                     {
                         new WOLUtil().SendWOL(machine.MAC);
-                    } catch (Exception ex)
+                    }
+                    catch (Exception ex)
                     {
                         TBLog.Text += ex.ToString();
                     }
+                    BtnWakeUp.Enabled = true;
                 }
                 else
                 {
                     TBLog.Text += $"Unknown machine {Item.Text}";
                 }
-
             }
-
         }
+
     }
 }
